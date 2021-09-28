@@ -1,6 +1,6 @@
-package com.wcm.webcustomermanager.service;
+package com.wcm.webcustomermanager.service.customer;
 
-import com.wcm.webcustomermanager.dao.CustomerDAO;
+import com.wcm.webcustomermanager.dao.customer.CustomerDAO;
 import com.wcm.webcustomermanager.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +19,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public Customer getCustomer(int id) {
-        return null;
+        return customerDAO.getCustomer(id);
     }
 
     @Override
@@ -30,12 +31,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public void saveCustomer(Customer customer) {
-
+        customerDAO.saveCustomer(customer);
     }
 
     @Override
+    @Transactional
     public void deleteCustomer(int id) {
-
+        customerDAO.deleteCustomer(id);
     }
 }

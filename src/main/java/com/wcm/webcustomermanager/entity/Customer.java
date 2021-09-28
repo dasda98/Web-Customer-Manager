@@ -1,6 +1,10 @@
 package com.wcm.webcustomermanager.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,13 +25,14 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany
+    @Fetch(FetchMode.JOIN)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "customer_product",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> productList;
+    private List<Product> productList = new ArrayList<>();
 
     public Customer() {}
 
@@ -75,6 +80,19 @@ public class Customer {
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
+    }
+
+    public void addProduct(Product product) {
+        if (productList == null) {
+            productList = new ArrayList<>();
+        }
+        productList.add(product);
+        product.getCustomerList().add(this);
+    }
+
+    public void removeProduct(Product product) {
+        productList.remove(product);
+        product.getCustomerList().remove(this);
     }
 
     @Override

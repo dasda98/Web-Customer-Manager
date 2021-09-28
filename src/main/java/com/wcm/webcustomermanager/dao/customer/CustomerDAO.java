@@ -1,4 +1,4 @@
-package com.wcm.webcustomermanager.dao;
+package com.wcm.webcustomermanager.dao.customer;
 
 import com.wcm.webcustomermanager.entity.Customer;
 
@@ -13,4 +13,5 @@ public interface CustomerDAO {
     void saveCustomer(Customer customer);
 
     void deleteCustomer(int id);
+
 }

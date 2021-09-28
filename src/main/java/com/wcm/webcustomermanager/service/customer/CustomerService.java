@@ -1,6 +1,7 @@
-package com.wcm.webcustomermanager.service;
+package com.wcm.webcustomermanager.service.customer;
 
 import com.wcm.webcustomermanager.entity.Customer;
+import com.wcm.webcustomermanager.entity.Product;
 
 import java.util.List;
 
@@ -13,4 +14,6 @@ public interface CustomerService {
     void saveCustomer(Customer customer);
 
     void deleteCustomer(int id);
+
+
 }

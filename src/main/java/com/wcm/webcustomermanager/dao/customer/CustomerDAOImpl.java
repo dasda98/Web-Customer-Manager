@@ -1,4 +1,4 @@
-package com.wcm.webcustomermanager.dao;
+package com.wcm.webcustomermanager.dao.customer;
 
 import com.wcm.webcustomermanager.entity.Customer;
 import org.hibernate.Session;
@@ -21,7 +21,12 @@ public class CustomerDAOImpl implements CustomerDAO {
 
     @Override
     public Customer getCustomer(int id) {
-        return null;
+
+        Session session = sessionFactory.getCurrentSession();
+
+        Customer customer = session.get(Customer.class, id);
+
+        return customer;
     }
 
     @Override
@@ -39,10 +44,19 @@ public class CustomerDAOImpl implements CustomerDAO {
     @Override
     public void saveCustomer(Customer customer) {
 
+        Session session = sessionFactory.getCurrentSession();
+
+        session.saveOrUpdate(customer);
     }
 
     @Override
     public void deleteCustomer(int id) {
 
+        Session session = sessionFactory.getCurrentSession();
+
+        Query customerQuery = session.createQuery("delete from Customer where id=:customerId");
+        customerQuery.setParameter("customerId", id);
+
+        customerQuery.executeUpdate();
     }
 }
