@@ -1,0 +1,8 @@
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.customer-list-table-th {
+    text-align: center;
+}

@@ -4,6 +4,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,14 +33,15 @@ public class Customer {
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> productList = new ArrayList<>();
+    private List<Product> productList;
 
     public Customer() {}
 
-    public Customer(String firstName, String lastName, String email) {
+    public Customer(String firstName, String lastName, String email, List<Product> productList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.productList = productList;
     }
 
     public int getId() {

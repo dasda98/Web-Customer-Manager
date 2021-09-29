@@ -1,6 +1,7 @@
 package com.wcm.webcustomermanager.dao.customer;
 
 import com.wcm.webcustomermanager.entity.Customer;
+import com.wcm.webcustomermanager.entity.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
