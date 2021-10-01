@@ -19,19 +19,15 @@ public class CustomerValidator implements Validator {
 
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,
                 "firstName",
-                "error.firstName",
-                "First name is required."
+                "customer.error.firstName"
         );
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,
                 "lastName",
-                "error.lastName",
-                "Last name is required."
+                "customer.error.lastName"
         );
         ValidationUtils.rejectIfEmptyOrWhitespace(errors,
                 "email",
-                "error.email",
-                "Email is required."
+                "customer.error.email"
         );
-
     }
 }

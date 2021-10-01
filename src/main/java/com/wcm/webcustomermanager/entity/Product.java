@@ -5,7 +5,9 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
@@ -22,14 +24,14 @@ public class Product {
     @Column(name = "price")
     private Double price;
 
-    @Fetch(FetchMode.JOIN)
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "customer_product",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "customer_id")
-    )
-    private List<Customer> customerList = new ArrayList<>();
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(
+//            name = "customer_product",
+//            joinColumns = @JoinColumn(name = "product_id"),
+//            inverseJoinColumns = @JoinColumn(name = "customer_id")
+//    )
+    @ManyToMany(mappedBy = "productList")
+    private Set<Customer> customerList;
 
     public Product() {}
 
@@ -62,17 +64,17 @@ public class Product {
         this.price = price;
     }
 
-    public List<Customer> getCustomerList() {
+    public Set<Customer> getCustomerList() {
         return customerList;
     }
 
-    public void setCustomerList(List<Customer> customerList) {
+    public void setCustomerList(Set<Customer> customerList) {
         this.customerList = customerList;
     }
 
     public void addCustomer(Customer customer) {
         if (customerList == null) {
-            customerList = new ArrayList<>();
+            customerList = new HashSet<Customer>();
         }
         customerList.add(customer);
         customer.getProductList().add(this);

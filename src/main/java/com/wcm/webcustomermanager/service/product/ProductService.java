@@ -13,4 +13,6 @@ public interface ProductService {
     void saveProduct(Product product);
 
     void deleteProduct(int id);
+
+    List<Product> searchProducts(String searchName);
 }

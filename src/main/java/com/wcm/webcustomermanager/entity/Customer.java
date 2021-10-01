@@ -6,7 +6,9 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "customer")
@@ -26,18 +28,17 @@ public class Customer {
     @Column(name = "email")
     private String email;
 
-    @Fetch(FetchMode.JOIN)
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "customer_product",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> productList;
+    private Set<Product> productList;
 
     public Customer() {}
 
-    public Customer(String firstName, String lastName, String email, List<Product> productList) {
+    public Customer(String firstName, String lastName, String email, Set<Product> productList) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -76,17 +77,17 @@ public class Customer {
         this.email = email;
     }
 
-    public List<Product> getProductList() {
+    public Set<Product> getProductList() {
         return productList;
     }
 
-    public void setProductList(List<Product> productList) {
+    public void setProductList(Set<Product> productList) {
         this.productList = productList;
     }
 
     public void addProduct(Product product) {
         if (productList == null) {
-            productList = new ArrayList<>();
+            productList = new HashSet<Product>();
         }
         productList.add(product);
         product.getCustomerList().add(this);

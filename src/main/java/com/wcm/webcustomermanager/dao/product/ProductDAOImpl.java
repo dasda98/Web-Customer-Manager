@@ -1,5 +1,6 @@
 package com.wcm.webcustomermanager.dao.product;
 
+import com.wcm.webcustomermanager.entity.Customer;
 import com.wcm.webcustomermanager.entity.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,5 +60,27 @@ public class ProductDAOImpl implements ProductDAO {
         productQuert.setParameter("productId", id);
 
         productQuert.executeUpdate();
+    }
+
+    @Override
+    public List<Product> searchProducts(String searchName) {
+
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = null;
+
+        if (searchName != null && searchName.trim().length() > 0) {
+            query = session.createQuery(
+                    "from Product where " +
+                            "lower(name) like :theName",
+                    Product.class);
+            query.setParameter("theName", "%" + searchName.toLowerCase() + "%");
+        } else {
+            query = session.createQuery("from Product", Product.class);
+        }
+
+        List<Product> productList = query.getResultList();
+
+        return productList;
     }
 }

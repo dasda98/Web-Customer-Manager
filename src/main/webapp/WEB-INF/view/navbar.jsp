@@ -8,7 +8,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/product/list/">Products</a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/product/list">Products</a>
             </li>
         </ul>
     </div>
